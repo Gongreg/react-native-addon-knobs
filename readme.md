@@ -28,6 +28,6 @@ render() {
   );
 }
 
-*It is very important to have StorybookUI created before RNKnobs is rendered!*
-
 ```
+
+*It is very important to have StorybookUI created before RNKnobs is rendered!*
