@@ -1,6 +1,6 @@
 {
   "name": "react-native-storybook-knobs",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Displays knobs panel inside react-native app",
   "main": "index.js",
   "scripts": {
