@@ -1,14 +1,51 @@
 import React, {PureComponent} from 'react';
-import {addons} from '@storybook/react-native';
+import {Platform, KeyboardAvoidingView, Button, TouchableWithoutFeedback, Modal, View} from 'react-native';
+import addons from '@storybook/addons';
 import Panel from './panel';
 
-export function register() {
-  addons.register('RNKNOBS', () => {
-    const channel = addons.getChannel();
-    addons.addPanel('RNKNOBS', {
-      title: 'Knobs',
-      // eslint-disable-next-line react/prop-types
-      render: () => <Panel channel={channel}/>,
-    });
-  });
+export default class RNKnobs extends PureComponent {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      showKnobs: false,
+    };
+
+    this.channel = addons.getChannel();
+  }
+
+  render() {
+
+    return (
+      <View>
+        <Button title="Knobs" onPress={() => this.setState({showKnobs: true})}/>
+        <Modal visible={this.state.showKnobs} transparent onRequestClose={() => {
+          this.setState({showKnobs: false})
+        }}>
+          <KeyboardAvoidingView behavior={(Platform.OS === 'ios') ? "padding" : null} style={{flex: 1}}>
+            <TouchableWithoutFeedback onPress={() => this.setState({showKnobs: false})}>
+              <View style={{
+                flex: 1,
+                backgroundColor: 'rgba(0,0,0,0)',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+                marginBottom: '2%'
+              }}>
+                <View style={{
+                  backgroundColor: 'white',
+                  width: '90%',
+                  maxHeight: '35%',
+                  flex: 1,
+                  borderWidth: 1,
+                  borderColor: 'black'
+                }}>
+                  <Panel channel={this.channel}/>
+                </View>
+              </View>
+            </TouchableWithoutFeedback>
+          </KeyboardAvoidingView>
+        </Modal>
+      </View>
+    );
+  }
 }
