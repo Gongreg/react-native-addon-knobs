@@ -113,7 +113,11 @@ export default class Panel extends React.Component {
     knobsArray = knobsArray.map(key => knobs[key]);
 
     if (knobsArray.length === 0) {
-      return <Text>NO KNOBS</Text>
+      return (
+        <ScrollView style={{paddingTop: 10}}>
+          <Text>NO KNOBS</Text>
+        </ScrollView>
+      );
     }
 
     return (

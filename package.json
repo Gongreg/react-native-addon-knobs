@@ -1,6 +1,6 @@
 {
   "name": "react-native-storybook-knobs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Displays knobs panel inside react-native app",
   "main": "index.js",
   "scripts": {
@@ -23,9 +23,11 @@
     "url": "https://github.com/Gongreg/react-native-addon-knobs/issues"
   },
   "homepage": "https://github.com/Gongreg/react-native-addon-knobs#readme",
+  "peerDependencies": {
+    "@storybook/addons": "*",
+    "@storybook/react-native": "*"
+  },
   "dependencies": {
-    "@storybook/addons": "4.0.0-alpha.7",
-    "@storybook/react-native": "4.0.0-alpha.7",
     "deep-equal": "^1.0.1",
     "react-native-color-picker": "^0.4.0",
     "react-native-modal-datetime-picker": "^5.1.0",
