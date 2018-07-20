@@ -1,7 +1,6 @@
 # React Native Addon Knobs
 
 Displays story knobs right inside the app.
-**Currently this is WIP. To make it work we need to merge [3636](https://github.com/storybooks/storybook/pull/3636) [3635](https://github.com/storybooks/storybook/pull/3635) [3634](https://github.com/storybooks/storybook/pull/3634)**
 
 ## Installation
 
