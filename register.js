@@ -8,7 +8,7 @@ export function register() {
     addons.addPanel('RNKNOBS', {
       title: 'Knobs',
       // eslint-disable-next-line react/prop-types
-      render: () => <Panel channel={channel}/>,
+      render: (active) => <Panel channel={channel}/>,
     });
   });
 }
