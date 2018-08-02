@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {addons} from '@storybook/react-native';
+import addons from '@storybook/addons';
 import Panel from './panel';
 
 export function register() {
@@ -8,7 +8,7 @@ export function register() {
     addons.addPanel('RNKNOBS', {
       title: 'Knobs',
       // eslint-disable-next-line react/prop-types
-      render: (active) => <Panel channel={channel}/>,
+      render: ({active}) => <Panel channel={channel}/>,
     });
   });
 }
