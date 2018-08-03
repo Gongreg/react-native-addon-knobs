@@ -19,7 +19,7 @@ export default class Panel extends React.Component {
     this.setOptions = this.setOptions.bind(this);
     this.onGroupSelect = this.onGroupSelect.bind(this);
 
-    this.state = { knobs: {}, groupId: DEFAULT_GROUP_ID };
+    this.state = {knobs: {}, groupId: DEFAULT_GROUP_ID};
     this.options = {};
 
     this.lastEdit = getTimestamp();
@@ -46,17 +46,17 @@ export default class Panel extends React.Component {
   }
 
   onGroupSelect(name) {
-    this.setState({ groupId: name });
+    this.setState({groupId: name});
   }
 
-  setOptions(options = { timestamps: false }) {
+  setOptions(options = {timestamps: false}) {
     this.options = options;
   }
 
-  setKnobs({ knobs, timestamp }) {
+  setKnobs({knobs, timestamp}) {
 
     if (!this.options.timestamps || !timestamp || this.lastEdit <= timestamp) {
-      this.setState({ knobs });
+      this.setState({knobs});
     }
   }
 
@@ -66,17 +66,17 @@ export default class Panel extends React.Component {
 
   handleChange(changedKnob) {
     this.lastEdit = getTimestamp();
-    const { knobs } = this.state;
-    const { name } = changedKnob;
-    const newKnobs = { ...knobs };
+    const {knobs} = this.state;
+    const {name} = changedKnob;
+    const newKnobs = {...knobs};
     newKnobs[name] = {
       ...newKnobs[name],
       ...changedKnob,
     };
 
-    this.setState({ knobs: newKnobs });
+    this.setState({knobs: newKnobs});
 
-    this.setState({ knobs: newKnobs }, this.emitChange(changedKnob));
+    this.setState({knobs: newKnobs}, this.emitChange(changedKnob));
   }
 
   handleClick(knob) {
@@ -84,7 +84,13 @@ export default class Panel extends React.Component {
   }
 
   render() {
-    const { knobs, groupId } = this.state;
+    const {active} = this.props;
+
+    if (!active) {
+      return null;
+    }
+
+    const {knobs, groupId} = this.state;
 
     const groups = {};
     const groupIds = [];
@@ -114,16 +120,12 @@ export default class Panel extends React.Component {
 
     if (knobsArray.length === 0) {
       return (
-        <ScrollView style={{paddingTop: 10}}>
-          <Text>NO KNOBS</Text>
-        </ScrollView>
+        <Text>NO KNOBS</Text>
       );
     }
 
     return (
-      <ScrollView style={{paddingTop: 10}}>
-      <TouchableWithoutFeedback>
-        <View>
+      <View style={{flex: 1}}>
         {groupIds.length > 0 && (
           <GroupTabs
             groups={groups}
@@ -138,12 +140,18 @@ export default class Panel extends React.Component {
             onFieldClick={this.handleClick}
           />
         </View>
-        <TouchableOpacity style={{borderRadius: 2, borderWidth: 1, borderColor: '#f7f4f4', padding: 4, margin: 10, justifyContent: 'center', alignItems: 'center'}} onPress={this.reset}>
+        <TouchableOpacity style={{
+          borderRadius: 2,
+          borderWidth: 1,
+          borderColor: '#f7f4f4',
+          padding: 4,
+          margin: 10,
+          justifyContent: 'center',
+          alignItems: 'center'
+        }} onPress={this.reset}>
           <Text>RESET</Text>
         </TouchableOpacity>
-        </View>
-        </TouchableWithoutFeedback>
-      </ScrollView>
+      </View>
     );
   }
 }
